@@ -29,7 +29,7 @@ import (
 
 	"github.com/golang/glog"
 
-	"k8s.io/api/core/v1"
+	v1 "k8s.io/api/core/v1"
 	apiequality "k8s.io/apimachinery/pkg/api/equality"
 	apierrors "k8s.io/apimachinery/pkg/api/errors"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
@@ -140,6 +140,9 @@ type Controller struct {
 
 	// Lock to access evictor workers
 	evictorLock sync.Mutex
+
+	// Lock so the evictor and monitor do not stomp on eachother
+	monitorEvictionLock sync.Mutex
 
 	// workers that evicts pods from unresponsive nodes.
 	zonePodEvictor map[string]*scheduler.RateLimitedTimedQueue
@@ -510,6 +513,8 @@ func (nc *Controller) doNoExecuteTaintingPass() {
 }
 
 func (nc *Controller) doEvictionPass() {
+	nc.monitorEvictionLock.Lock()
+	defer nc.monitorEvictionLock.Unlock()
 	nc.evictorLock.Lock()
 	defer nc.evictorLock.Unlock()
 	for k := range nc.zonePodEvictor {
@@ -542,6 +547,10 @@ func (nc *Controller) doEvictionPass() {
 // post "NodeReady==ConditionUnknown". It also evicts all pods if node is not ready or
 // not reachable for a long period of time.
 func (nc *Controller) monitorNodeStatus() error {
+	if !nc.useTaintBasedEvictions {
+		nc.monitorEvictionLock.Lock()
+		defer nc.monitorEvictionLock.Unlock()
+	}
 	// We are listing nodes from local cache as we can tolerate some small delays
 	// comparing to state from etcd and there is eventual consistency anyway.
 	nodes, err := nc.nodeLister.List(labels.Everything())
