@@ -1,5 +1,5 @@
-hash: 684a4601795d6b3c36c17ce1020fa4b852b7f970eab721bf5a01a70cb1ff861d
-updated: 2020-02-18T10:31:47.251906175-06:00
+hash: b329521a6b520c301783f3c143f87f2adc50dc220dd8b56bfb89e559b8a620b4
+updated: 2020-02-21T08:34:16.293921602-06:00
 imports:
 - name: bitbucket.org/ww/goautoneg
   version: 2ae31c8b6b30d2f4c8100c20d527b571e9c433bb
@@ -107,7 +107,7 @@ imports:
   subpackages:
   - rpc
 - name: github.com/cilium/ebpf
-  version: de57e915ff34190f6633850097196473c7d4ebff
+  version: 243d06f69c38017ae0cc519e6aeede95d01dcd07
   subpackages:
   - asm
   - internal
@@ -372,8 +372,7 @@ imports:
 - name: github.com/google/btree
   version: 4030bb1f1f0c35b30ca7009e9ebd06849dd45306
 - name: github.com/google/cadvisor
-  version: 4db825a8ad0d97945bb723db66b7e60eab77a352
-  repo: https://github.com/openshift/google-cadvisor.git
+  version: 49033161cc529be82d2672805a196752a74eac9d
   subpackages:
   - accelerators
   - cache/memory
@@ -898,7 +897,7 @@ imports:
   - user/informers/externalversions/user/v1
   - user/listers/user/v1
 - name: github.com/openshift/library-go
-  version: e77ad9dd8ebd3bba81f5aae761d097ff1f990cac
+  version: 952ac5a188d6c8bf6d16d409912f942185071754
   subpackages:
   - pkg/apiserver/admission/admissionrestconfig
   - pkg/apiserver/admission/admissiontimeout
@@ -2194,7 +2193,7 @@ imports:
   - pkg/apis/deviceplugin/v1beta1
   - pkg/apis/pluginregistration/v1
 - name: k8s.io/kubernetes
-  version: f83e2aafe1c526ec7f38562e34b803013c84745d
+  version: c9089c1e95e0b41ee9271ad94fc49c0e3e8c225b
   repo: https://github.com/openshift/kubernetes.git
   subpackages:
   - cmd/cloud-controller-manager/app

@@ -125,8 +125,7 @@ import:
     repo: https://github.com/openshift/onsi-ginkgo.git
     version: origin-4.3
   - package: github.com/google/cadvisor
-    repo: https://github.com/openshift/google-cadvisor.git
-    version: openshift-4.3-cadvisor-v0.33.2
+    version: v0.35.0
   # these need to match the kubelet
   # TODO(node): recheck these levels
   - package: github.com/docker/distribution
